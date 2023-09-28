@@ -19,18 +19,6 @@ public class GeneratorMappingController {
 
 	private GeneratorService generatorMappingService;
 	
-	@GetMapping("/allGen-mapping-list")
-	public ResponseEntity<Object> getAllGenMappingList()
-	{
-		List<GeneratorMappingEntity> allGenMappingList= generatorMappingService.getAllGenMapping();
-		if(allGenMappingList.isEmpty()==true) {
-			return ResponseHandler.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, false, "No Gen Found in Mapping Table", null);
-		}
-		else {
-			return ResponseHandler.generateResponse(HttpStatus.OK, true, "Generator Mapping Data Fetch Successfull", allGenMappingList);
-		}
-		
-	}
 	
 	@GetMapping("/state-list")
 	public ResponseEntity<Object> getStateList()

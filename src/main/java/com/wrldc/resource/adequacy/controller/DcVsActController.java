@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wrldc.resource.adequacy.dto.ResponseHandler;
 import com.wrldc.resource.adequacy.dto.response.DcAndActualSingleGenResponseDto;
+import com.wrldc.resource.adequacy.dto.response.GenDcResponseDto;
 import com.wrldc.resource.adequacy.entity.GeneratorDcDataEntity;
 import com.wrldc.resource.adequacy.service.GeneratorService;
 
@@ -45,14 +46,22 @@ public class DcVsActController {
 
 	}
 	
-	@RequestMapping(value = { "/api/time" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/api/dc/{genName}" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Object> getDcAndActualDataByTime() {
-		
-		List<GeneratorDcDataEntity> resData = generatorMappingService.getDataFromTime();
-//		System.out.println(resData);
-		return ResponseHandler.generateResponse(HttpStatus.OK, true, " Fetch Successfull",resData);
-		
+	public ResponseEntity<Object> getDCByState(@PathVariable String genName) {
+		List<GenDcResponseDto>  genDcResponseDtoList= generatorMappingService.getDCByState(genName);
+		if (genDcResponseDtoList.isEmpty() == true || (genDcResponseDtoList==null)==true) {
+			return ResponseHandler.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, false, "DC Data Fetch UnSuccessfull",
+					null);
+		} else {
+			return ResponseHandler.generateResponse(HttpStatus.OK, true, "DC Data Fetch Successfull",
+					genDcResponseDtoList);
+		}
 
 	}
+	
+	
+		
+
+	
 }

@@ -11,11 +11,10 @@ import lombok.Setter;
 @Getter
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
 public class DcAndActualSingleGenResponseDto {
 
 	private String plantName;
 	private String dateTime;
 	private Integer dcValue;
-	private Integer actualValue;
+	private Long actualValue;
 }

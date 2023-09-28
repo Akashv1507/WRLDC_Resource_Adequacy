@@ -4,7 +4,7 @@ const webpack = require('webpack');
 module.exports = {
   // multiple entry points - https://github.com/webpack/docs/wiki/multiple-entry-points
   entry: {
-    dcVsActIndex: ["babel-polyfill", path.resolve(__dirname, "src/dcVsAct/dcVsActIndex.ts")],
+    dcVsActIndex: ["babel-polyfill", path.resolve(__dirname, "src/dcVsAct/dcAndActIndex.ts")],
     
   },
 

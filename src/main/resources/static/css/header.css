@@ -29,7 +29,7 @@ h2 {
   position: -webkit-sticky; /* Safari */
   position: sticky;
   top: 0;
-  background-color: #fff;
+  background-color: white;
 }
 
 .grad-bar {
