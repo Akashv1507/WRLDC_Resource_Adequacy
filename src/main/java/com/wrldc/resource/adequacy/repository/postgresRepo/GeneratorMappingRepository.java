@@ -1,4 +1,4 @@
-package com.wrldc.resource.adequacy.repository;
+package com.wrldc.resource.adequacy.repository.postgresRepo;
 
 import java.util.List;
 

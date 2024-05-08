@@ -1,4 +1,4 @@
-package com.wrldc.resource.adequacy.entity;
+package com.wrldc.resource.adequacy.dto.response;
 
 import java.time.LocalDateTime;
 
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class ScadaData {
+public class TimestampData {
 	private LocalDateTime timestamp;
     private double value;
 

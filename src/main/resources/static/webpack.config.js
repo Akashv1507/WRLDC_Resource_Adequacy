@@ -4,8 +4,8 @@ const webpack = require('webpack');
 module.exports = {
   // multiple entry points - https://github.com/webpack/docs/wiki/multiple-entry-points
   entry: {
-    dcVsActIndex: ["babel-polyfill", path.resolve(__dirname, "src/dcVsAct/dcAndActIndex.ts")],
-    
+    dcSchActIndex: ["babel-polyfill", path.resolve(__dirname, "src/dcSchAct/dcSchActIndex.ts")],
+    adequacyPlotIndex: ["babel-polyfill", path.resolve(__dirname, "src/adequacyPlots/adequacyPlotIndex.ts")]  
   },
 
   output: {
@@ -42,6 +42,7 @@ module.exports = {
         loader: "source-map-loader",
       },
     ],
+    
   },
 
   plugins: [

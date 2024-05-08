@@ -12,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.wrldc.resource.adequacy.dto.ResponseHandler;
-import com.wrldc.resource.adequacy.dto.response.DcAndActualSingleGenResponseDto;
-import com.wrldc.resource.adequacy.dto.response.GenDcResponseDto;
-import com.wrldc.resource.adequacy.entity.GeneratorDcDataEntity;
+import com.wrldc.resource.adequacy.dto.response.DcSchActualSingleGenResponseDto;
+import com.wrldc.resource.adequacy.dto.response.GenDcSchResponseDto;
 import com.wrldc.resource.adequacy.service.GeneratorService;
 
 import lombok.AllArgsConstructor;
@@ -29,13 +28,13 @@ public class DcVsActController {
 	public String getDcVsActPage(Model model) {
 		List<String> statesList = generatorMappingService.getStateList();
 		model.addAttribute("statesList", statesList);
-		return "dcVsAct";
+		return "dcSchAct";
 	}
 
 	@RequestMapping(value = { "/api/dcVsAct/{stateName}" }, method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<Object> getDcAndActualDataByState(@PathVariable String stateName) {
-		List<DcAndActualSingleGenResponseDto> dcAndActualResponseDto = generatorMappingService.getDcAndActualDataByState(stateName);
+		List<DcSchActualSingleGenResponseDto> dcAndActualResponseDto = generatorMappingService.getDcSchActualDataByState(stateName);
 		if (dcAndActualResponseDto.isEmpty() == true) {
 			return ResponseHandler.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, false, "DC and Actual Data Fetch UnSuccessfull",
 					null);
@@ -46,16 +45,16 @@ public class DcVsActController {
 
 	}
 	
-	@RequestMapping(value = { "/api/dc/{genName}" }, method = RequestMethod.GET)
+	@RequestMapping(value = { "/api/dcSch/{genName}" }, method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<Object> getDCByState(@PathVariable String genName) {
-		List<GenDcResponseDto>  genDcResponseDtoList= generatorMappingService.getDCByState(genName);
-		if (genDcResponseDtoList.isEmpty() == true || (genDcResponseDtoList==null)==true) {
+	public ResponseEntity<Object> getDcSchByGenName(@PathVariable String genName) {
+		List<GenDcSchResponseDto>  genDcSchResponseDtoList= generatorMappingService.getDcSchByGen(genName);
+		if (genDcSchResponseDtoList.isEmpty() == true || (genDcSchResponseDtoList==null)==true) {
 			return ResponseHandler.generateResponse(HttpStatus.INTERNAL_SERVER_ERROR, false, "DC Data Fetch UnSuccessfull",
 					null);
 		} else {
 			return ResponseHandler.generateResponse(HttpStatus.OK, true, "DC Data Fetch Successfull",
-					genDcResponseDtoList);
+					genDcSchResponseDtoList);
 		}
 
 	}

@@ -41,8 +41,20 @@ public class GeneratorMappingEntity {
 	private String scadaId;
 	@Column(name = "intraday_dc_file_tag", nullable = false, unique = true)
 	private String intradayDcFileTag;
-
+	@Column(name = "installed_capacity")
+	private Integer installedCapacity;
+	
+	@Column(name = "outage_unit_name", unique = true)
+	private String outageUnitName;
+	@Column(name = "intraday_sch_file_tag", nullable = false, unique = true)
+	private String intradaySchFileTag;
+	
+	@Column(name = "aux_consumption", nullable = false)
+	private float auxConsumption;
+	
 	@OneToMany(mappedBy = "plant")
-	private List<GeneratorDcDataEntity> dataEntities;
-
+	private List<GeneratorDcDataEntity> dcDataEntities;
+	
+	@OneToMany(mappedBy = "plant")
+	private List<GeneratorSchDataEntity> schDataEntities;
 }

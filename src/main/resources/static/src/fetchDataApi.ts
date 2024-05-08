@@ -1,9 +1,9 @@
-import { IdcAndActResp} from "./interfacesTypes/dcAndActTypes";
-import { IdcDataResp } from "./interfacesTypes/dcDataTypes";
-
-export const getDcAndActData = async (
+import { IDcSchActResp} from "./interfacesTypes/dcSchActTypes";
+import { IDcSchDataResp } from "./interfacesTypes/dcSchDataTypes";
+import {IAdequacyPlotDataResp} from "./interfacesTypes/AdequacyPlotData"
+export const getDcSchActData = async (
   stateName: string
-): Promise<IdcAndActResp | null> => {
+): Promise<IDcSchActResp | null> => {
   try {
     const resp = await fetch(`/api/dcVsAct/${stateName}`, {
       method: "get",
@@ -16,11 +16,28 @@ export const getDcAndActData = async (
   }
 };
 
-export const getDcData = async (
+export const getDcSchData = async (
   genName: string
-): Promise<IdcDataResp | null> => {
+): Promise<IDcSchDataResp | null> => {
   try {
-    const resp = await fetch(`/api/dc/${genName}`, {
+    const resp = await fetch(`/api/dcSch/${genName}`, {
+      method: "get",
+    });
+    const respJSON = await resp.json();
+    return respJSON;
+  } catch (e) {
+    console.error(e);
+    return null;
+  }
+};
+
+export const getAdequacyPlotData = async (
+  entityTag: string,
+  startTimeStr:string,
+  endTimeStr:string
+): Promise<IAdequacyPlotDataResp | null> => {
+  try {
+    const resp = await fetch(`/api/adequacyPlotData/${entityTag}/${startTimeStr}/${endTimeStr} `, {
       method: "get",
     });
     const respJSON = await resp.json();

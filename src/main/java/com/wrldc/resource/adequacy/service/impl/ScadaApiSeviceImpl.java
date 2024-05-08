@@ -20,7 +20,7 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
-import com.wrldc.resource.adequacy.entity.ScadaData;
+import com.wrldc.resource.adequacy.dto.response.TimestampData;
 import com.wrldc.resource.adequacy.service.ScadaApiService;
 
 @Service
@@ -40,7 +40,7 @@ public class ScadaApiSeviceImpl implements ScadaApiService {
 	private RestTemplate restTemplate;
 
 	@Override
-	public List<ScadaData> fetchData(String measId, String startDt, String endDt) {
+	public List<TimestampData> fetchData(String measId, String startDt, String endDt) {
 
 		// Construct the API URL
 		String apiUrl = String.format("%s/api/scadadata/%s/%s/%s", apiBaseUrl, measId, startDt, endDt);
@@ -71,22 +71,22 @@ public class ScadaApiSeviceImpl implements ScadaApiService {
 		}
 		List<Number> apiDataList=scadaApiResponseEntity.getBody();
 		// Parse the response and convert it into a list of ScadaData objects
-		List<ScadaData> scadaDataList = parseApiResponse(apiDataList);
+		List<TimestampData> scadaDataList = parseApiResponse(apiDataList);
 
 		// System.out.print(apiResponse);
 
 		return scadaDataList;
 	}
 
-	public List<ScadaData> parseApiResponse(List<Number> apiDataList) {
+	public List<TimestampData> parseApiResponse(List<Number> apiDataList) {
 		// Implement logic to parse the API response and convert it into a
 		// List<ScadaData>
-		List<ScadaData> scadaDataList = new ArrayList<>();
+		List<TimestampData> scadaDataList = new ArrayList<>();
 		for (int i = 0; i < apiDataList.size(); i += 2) {
 			LocalDateTime timestamp = LocalDateTime.ofInstant(Instant.ofEpochMilli((long) apiDataList.get(i)),TimeZone.getDefault().toZoneId());
 			//to handle integer value, first converting to string and then to double
 			double value = Double.valueOf(apiDataList.get(i+1).toString());
-			scadaDataList.add(new ScadaData(timestamp, value));
+			scadaDataList.add(new TimestampData(timestamp, value));
 		}
 		return scadaDataList;
 	}

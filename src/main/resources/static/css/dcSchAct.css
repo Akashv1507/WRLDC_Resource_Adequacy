@@ -1,3 +1,14 @@
+.headline {
+  width: 100%;
+  height: 20vh;
+  min-height: 150px;
+  background: linear-gradient(rgba(0,0,0,0.3),rgba(0,0,0,0.7)), url('https://www.tripwire.com/sites/default/files/2023-02/The-Problem-with-the-US-Power-Grid.jpg');
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 select {
 
   /* styling */
@@ -165,4 +176,15 @@ select.classic:focus {
         display: block;
         text-align: center;
     }
+}
+
+button.dt-button, div.dt-button, a.dt-button, input.dt-button {
+    border-radius: 5px !important;
+    color: white !important;
+    background-color: #4FC3A1 !important;
+}
+
+button.dt-button:hover:not(.disabled), div.dt-button:hover:not(.disabled), a.dt-button:hover:not(.disabled), input.dt-button:hover:not(.disabled) {
+    border: 2px solid #666 !important;
+    background-color: #324960 !important;
 }

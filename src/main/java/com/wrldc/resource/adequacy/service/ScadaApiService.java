@@ -1,16 +1,12 @@
 package com.wrldc.resource.adequacy.service;
 
-import java.time.Instant;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.TimeZone;
 
-import com.wrldc.resource.adequacy.entity.ScadaData;
+import com.wrldc.resource.adequacy.dto.response.TimestampData;
 
 public interface ScadaApiService {
-	public List<ScadaData> fetchData(String measId, String startDt, String endDt);
+	public List<TimestampData> fetchData(String measId, String startDt, String endDt);
 	
-	public List<ScadaData> parseApiResponse(List<Number> scadaDataList);
+	public List<TimestampData> parseApiResponse(List<Number> scadaDataList);
 }
 
